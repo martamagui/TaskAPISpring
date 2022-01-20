@@ -1,9 +1,9 @@
 package com.example.MichiTaskServer.model.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.example.MichiTaskServer.model.list.TaskList;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
