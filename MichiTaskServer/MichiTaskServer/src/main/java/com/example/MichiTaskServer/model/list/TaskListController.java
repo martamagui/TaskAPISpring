@@ -18,7 +18,7 @@ public class TaskListController {
         this.taskListService = taskListService;
     }
     @GetMapping
-    public List<TaskList> getUsers(){
+    public List<TaskList> getTaskList(){
         return taskListService.getTaskList();
     }
 }
