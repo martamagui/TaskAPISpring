@@ -1,18 +1,17 @@
 package com.example.MichiTaskServer.model.list;
 
-import com.example.MichiTaskServer.model.user.User;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "lists")
 public class TaskList {
     @Id
-    @Column(name="list_id")
+    @Column(name = "list_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer listId;
     private String name;
-    @Column(name="user_id_fk")
-    private Integer userIdFk;
+    @Column(name = "user_id_fk")
+    private Integer userFk;
 
     public TaskList() {
     }
@@ -20,7 +19,7 @@ public class TaskList {
     public TaskList(Integer listId, String name, Integer userIdFk) {
         this.listId = listId;
         this.name = name;
-        this.userIdFk = userIdFk;
+        this.userFk = userIdFk;
     }
 
     public Integer getListId() {
@@ -39,12 +38,20 @@ public class TaskList {
         this.name = name;
     }
 
+    public Integer getUserFk() {
+        return userFk;
+    }
+
+    public void setUserFk(Integer userFk) {
+        this.userFk = userFk;
+    }
+
     @Override
     public String toString() {
         return "TaskList{" +
                 "listId=" + listId +
                 ", name='" + name + '\'' +
-                ", user='" + userIdFk.toString() + '\'' +
+                ", user='" + userFk.toString() + '\'' +
                 '}';
     }
 }

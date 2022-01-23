@@ -38,7 +38,4 @@ public class UserController {
                          ){
         userService.editUser(userId, firstName,lastName, email, pwd);
     }
-
-
-
 }

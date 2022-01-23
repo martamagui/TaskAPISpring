@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 
 public interface TaskListRepository extends JpaRepository<TaskList,Integer> {
-    @Query("SELECT s FROM TaskList s WHERE s.listId=?1")
+    @Query("SELECT t FROM TaskList t WHERE t.listId=?1")
     Optional<TaskList> findTaskListById(Integer taskListId);
 }
