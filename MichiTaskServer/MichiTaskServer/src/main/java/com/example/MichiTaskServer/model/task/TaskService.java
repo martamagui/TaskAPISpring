@@ -45,4 +45,8 @@ public class TaskService {
             throw new IllegalStateException("This Task doesn't exist.");
         }
     }
+
+    public List<Task> tasksByListId(Integer listIdFk) {
+        return taskRepository.findTaskByListId(listIdFk);
+    }
 }

@@ -1,7 +1,6 @@
 package com.example.MichiTaskServer.model.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +20,11 @@ public class TaskController {
         return taskService.getTasks();
     }
 
+    @GetMapping(path = "{listIdFk}")
+    public List<Task> getTasksbyId(@PathVariable("listIdFk")Integer listIdFk) {
+        return taskService.tasksByListId(listIdFk);
+    }
+    
     @PostMapping
     public void addTask(Task task) {
         taskService.addTask(task);
