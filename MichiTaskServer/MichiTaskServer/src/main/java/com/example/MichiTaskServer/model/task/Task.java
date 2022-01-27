@@ -1,15 +1,13 @@
 package com.example.MichiTaskServer.model.task;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "task")
 public class Task {
     @Id
     @Column(name = "task_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer taskId;
     private String title;
     private String description;

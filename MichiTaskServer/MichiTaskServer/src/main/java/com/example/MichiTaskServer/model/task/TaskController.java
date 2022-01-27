@@ -21,10 +21,10 @@ public class TaskController {
     }
 
     @GetMapping(path = "{listIdFk}")
-    public List<Task> getTasksbyId(@PathVariable("listIdFk")Integer listIdFk) {
+    public List<Task> getTasksbyId(@PathVariable("listIdFk") Integer listIdFk) {
         return taskService.tasksByListId(listIdFk);
     }
-    
+
     @PostMapping
     public void addTask(Task task) {
         taskService.addTask(task);
@@ -41,7 +41,6 @@ public class TaskController {
                          @RequestParam(required = false) String taskTitle,
                          @RequestParam(required = false) String description,
                          @RequestParam(required = false) String state) {
-        taskService.editTask(taskId,taskTitle,description,state);
-
+        taskService.editTask(taskId, taskTitle, description, state);
     }
 }
