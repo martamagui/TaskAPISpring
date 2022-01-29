@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Service
 public class TaskService {
     private TaskRepository taskRepository;
@@ -11,37 +12,46 @@ public class TaskService {
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
-    public List<Task> getTasks(){return taskRepository.findAll();}
+
+    public List<Task> getTasks() {
+        return taskRepository.findAll();
+    }
+
+    public Task getTaskbyId(Integer taskId) {
+        return taskRepository.findTaskByTaskId(taskId).get();
+    }
 
     public void addTask(Task task) {
-        if(taskRepository.findTaskByTaskId(task.getTaskId()).isPresent()){
+        if (taskRepository.findTaskByTaskId(task.getTaskId()).isPresent()) {
             throw new IllegalStateException("Task Id already taken.");
-        }else{
+        } else {
             taskRepository.save(task);
         }
     }
 
+
     public void delete(Integer taskId) {
-        if(taskRepository.findTaskByTaskId(taskId).isPresent()){
+        if (taskRepository.findTaskByTaskId(taskId).isPresent()) {
             taskRepository.deleteById(taskId);
-        }else{
+        } else {
             throw new IllegalStateException("This Task doesn't exist.");
         }
     }
+
     @Transactional
     public void editTask(Integer taskId, String taskTitle, String description, String state) {
-        if(taskRepository.findTaskByTaskId(taskId).isPresent()){
+        if (taskRepository.findTaskByTaskId(taskId).isPresent()) {
             Task task = taskRepository.findTaskByTaskId(taskId).get();
-            if(taskTitle!=null){
+            if (taskTitle != null) {
                 task.setTitle(taskTitle);
             }
-            if(description!=null){
+            if (description != null) {
                 task.setDescription(description);
             }
-            if(state!=null){
+            if (state != null) {
                 task.setState(state);
             }
-        }else{
+        } else {
             throw new IllegalStateException("This Task doesn't exist.");
         }
     }
@@ -49,4 +59,6 @@ public class TaskService {
     public List<Task> tasksByListId(Integer listIdFk) {
         return taskRepository.findTaskByListId(listIdFk);
     }
+
+
 }

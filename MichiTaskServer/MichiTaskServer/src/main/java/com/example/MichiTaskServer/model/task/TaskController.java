@@ -24,6 +24,10 @@ public class TaskController {
     public List<Task> getTasksbyId(@PathVariable("listIdFk") Integer listIdFk) {
         return taskService.tasksByListId(listIdFk);
     }
+    @GetMapping(path = "id/{taskId}")
+    public Task getTaskbyId(@PathVariable("taskId") Integer taskId) {
+        return taskService.getTaskbyId(taskId);
+    }
 
     @PostMapping
     public void addTask(Task task) {
