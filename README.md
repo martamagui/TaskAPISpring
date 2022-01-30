@@ -22,8 +22,10 @@
 ```
 
 **(@POST)** TaskList -> */api/list*
+
+Body
+
 ```json
-//Body a enviar
     {
         "listId": 15,
         "name": "Nueva",
@@ -102,10 +104,22 @@ Body a enviar
         "state": "Terminado",
         "listIdFk": 15
     }
-    //Returna
-    true
 ```
 Retorna
 ```json
     true
+```
+
+**(@DELETE)** TaskList(retorna el id del elimnado) -> *api/tasks/{Task Id}*
+```json
+15
+```
+**(@PUT)** TaskList(retorna el id del elimnado) -> *api/tasks/{Task Id}*
+```json
+{
+        "taskId": 15,
+        "title": "Aspirar",
+        "description": "Aaaaaa",
+        "state": "Terminado",
+    }
 ```
