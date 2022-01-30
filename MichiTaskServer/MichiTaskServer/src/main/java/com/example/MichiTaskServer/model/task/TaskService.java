@@ -30,18 +30,20 @@ public class TaskService {
     }
 
 
-    public void delete(Integer taskId) {
+    public boolean delete(Integer taskId) {
         if (taskRepository.findTaskByTaskId(taskId).isPresent()) {
             taskRepository.deleteById(taskId);
+            return true;
         } else {
-            throw new IllegalStateException("This Task doesn't exist.");
+            return false;
         }
     }
 
     @Transactional
-    public void editTask(Integer taskId, String taskTitle, String description, String state) {
+    public Task editTask(Integer taskId, String taskTitle, String description, String state) {
         if (taskRepository.findTaskByTaskId(taskId).isPresent()) {
             Task task = taskRepository.findTaskByTaskId(taskId).get();
+            System.out.println(taskTitle+" "+description+" "+state);
             if (taskTitle != null) {
                 task.setTitle(taskTitle);
             }
@@ -54,6 +56,8 @@ public class TaskService {
         } else {
             throw new IllegalStateException("This Task doesn't exist.");
         }
+        Task task2 = taskRepository.findTaskByTaskId(taskId).get();
+        return task2;
     }
 
     public List<Task> tasksByListId(Integer listIdFk) {

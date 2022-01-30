@@ -1,6 +1,8 @@
 package com.example.MichiTaskServer.model.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,11 +22,11 @@ public class TaskController {
         return taskService.getTasks();
     }
 
-    @GetMapping(path = "{listIdFk}")
-    public List<Task> getTasksbyId(@PathVariable("listIdFk") Integer listIdFk) {
+    @GetMapping(path = "bylistId/{listIdFk}")
+    public List<Task> getTasksbyListId(@PathVariable("listIdFk") Integer listIdFk) {
         return taskService.tasksByListId(listIdFk);
     }
-    @GetMapping(path = "id/{taskId}")
+    @GetMapping(path = "{taskId}")
     public Task getTaskbyId(@PathVariable("taskId") Integer taskId) {
         return taskService.getTaskbyId(taskId);
     }
@@ -35,16 +37,22 @@ public class TaskController {
     }
 
     @DeleteMapping(path = "{taskId}")
-    public void deleteUser(@PathVariable("taskId") Integer taskId) {
-        taskService.delete(taskId);
+    public ResponseEntity<Integer> deleteUser(@PathVariable("taskId") Integer taskId) {
+
+        if(taskService.delete(taskId)){
+            return new ResponseEntity<Integer>(taskId,HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     //No pongo que se pueda cambiar el fk de la lista porque de moento no panteo que se puedan migrar als tareas de lista a lista
     @PutMapping(path = "{taskId}")
-    public void editTask(@PathVariable("taskId") Integer taskId,
-                         @RequestParam(required = false) String taskTitle,
+    public Task editTask(@PathVariable("taskId") Integer taskId,
+                         @RequestParam(required = false) String title,
                          @RequestParam(required = false) String description,
                          @RequestParam(required = false) String state) {
-        taskService.editTask(taskId, taskTitle, description, state);
+        return taskService.editTask(taskId, title, description, state);
     }
 }
