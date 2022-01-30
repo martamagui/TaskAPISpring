@@ -2,6 +2,8 @@ package com.example.MichiTaskServer.model.list;
 
 import com.example.MichiTaskServer.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,8 +30,12 @@ public class TaskListController {
     }
 
     @DeleteMapping(path = "{taskListId}")
-    public void deleteTaskList(@PathVariable("taskListId") Integer taskListId) {
-        taskListService.delete(taskListId);
+    public ResponseEntity<Integer> deleteTaskList(@PathVariable("taskListId") Integer taskListId) {
+        if(taskListService.delete(taskListId)){
+            return new ResponseEntity<Integer>(taskListId, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping(path = "{taskListId}")

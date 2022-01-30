@@ -24,11 +24,12 @@ public class TaskListService {
         }
     }
 
-    public void delete(Integer taskListId) {
+    public boolean delete(Integer taskListId) {
         if(taskListRepository.findTaskListById(taskListId).isPresent()){
-            throw new IllegalStateException("This list alredy exist.");
-        }else{
             taskListRepository.deleteById(taskListId);
+            return true;
+        }else{
+            return false;
         }
     }
     @Transactional

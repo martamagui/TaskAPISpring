@@ -53,6 +53,6 @@ public class TaskController {
                          @RequestParam(required = false) String title,
                          @RequestParam(required = false) String description,
                          @RequestParam(required = false) String state) {
-        return taskService.editTask(taskId, ttle, description, state);
+        return taskService.editTask(taskId, title, description, state);
     }
 }
