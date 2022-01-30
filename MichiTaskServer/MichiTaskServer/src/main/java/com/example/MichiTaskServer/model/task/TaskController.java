@@ -31,9 +31,16 @@ public class TaskController {
         return taskService.getTaskbyId(taskId);
     }
 
+    @GetMapping(path="getmyTaskId")
+    public int getmyTaskId(){
+        return taskService.getmyTaskId();
+    }
+
     @PostMapping
-    public void addTask(Task task) {
+    public boolean addTask(@RequestBody Task task) {
+        System.out.println(task.toString());
         taskService.addTask(task);
+        return true;
     }
 
     @DeleteMapping(path = "{taskId}")

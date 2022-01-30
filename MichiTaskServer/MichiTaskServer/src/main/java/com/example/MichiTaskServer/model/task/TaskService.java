@@ -21,12 +21,13 @@ public class TaskService {
         return taskRepository.findTaskByTaskId(taskId).get();
     }
 
-    public void addTask(Task task) {
+    public boolean addTask(Task task) {
         if (taskRepository.findTaskByTaskId(task.getTaskId()).isPresent()) {
             throw new IllegalStateException("Task Id already taken.");
         } else {
             taskRepository.save(task);
         }
+        return true;
     }
 
 
@@ -43,7 +44,7 @@ public class TaskService {
     public Task editTask(Integer taskId, String taskTitle, String description, String state) {
         if (taskRepository.findTaskByTaskId(taskId).isPresent()) {
             Task task = taskRepository.findTaskByTaskId(taskId).get();
-            System.out.println(taskTitle+" "+description+" "+state);
+            System.out.println(taskTitle + " " + description + " " + state);
             if (taskTitle != null) {
                 task.setTitle(taskTitle);
             }
@@ -65,4 +66,8 @@ public class TaskService {
     }
 
 
+    public int getmyTaskId() {
+        List<Task> lista = taskRepository.findAll();
+        return (lista.size() + 1);
+    }
 }

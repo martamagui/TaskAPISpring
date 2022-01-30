@@ -25,7 +25,12 @@ public class Task {
         this.state = state;
         this.listIdFk = listIdFk;
     }
-
+    public Task(String title, String description, String state, Integer listIdFk) {
+        this.title = title;
+        this.description = description;
+        this.state = state;
+        this.listIdFk = listIdFk;
+    }
     public Integer getTaskId() {
         return taskId;
     }
