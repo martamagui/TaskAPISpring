@@ -1,7 +1,12 @@
 # TaskAPISpring
+
+Para poder ejecutar esta aplicación es necesario:
+- [ ] Disponer de un servidor MySql en el que tener instalar la BD del proyecto de la API(Disponible en la carpeta: ScriptDB)
+- [ ] Levantar el servidor de Spring
+
 </br></br>
 
-# 📃 TaskList Request 📃
+## 📃 TaskList Request 📃
 
 </br>
 
@@ -38,7 +43,7 @@ Body
 ```
 </br></br>
 
-# ✏ Task ✏
+## ✏ Task ✏
 
 **(@GET)** List of all Task -> *api/tasks*
 ```json
